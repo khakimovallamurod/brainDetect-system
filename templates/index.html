@@ -2,31 +2,52 @@
 
 {% block content %}
 <div class="container">
+    <!-- Hero Section -->
     <div class="hero">
         <h1 class="hero-title">NeuroScan AI</h1>
         <p class="hero-subtitle">
             Sun'iy intellekt yordamida miya o'simtalarini aniqlash platformasi. 
             Tez, aniq va ishonchli tahlil.
         </p>
-        
-        <div class="creator-card">
-            <img src="{{ url_for('static', filename='images/creator.jpg') }}" 
-                 alt="Latif Xurramov" 
-                 class="creator-image"
-                 onerror="this.src='https://via.placeholder.com/120x120/2563eb/ffffff?text=LX'">
-            <h3 class="creator-name">Latif Xurramov</h3>
-            <p class="creator-bio">
-                Python/Flask dasturchisi, AI mutaxassisi. Ushbu loyiha tibbiyot sohasiga 
-                hissa qo'shish maqsadida yaratildi.
-            </p>
-        </div>
+    </div>
+    <!-- Image Slider Section -->
+    <div class="slider-section">
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide active">
+                    <img src="{{ url_for('static', filename='images/brain.jpg') }}" alt="MRI Scan 1">
+                    <div class="slide-content">
+                        <h3>Yuqori sifatli MRI tahlili</h3>
+                        <p>AI texnologiyasi yordamida aniq natijalar</p>
+                    </div>
+                </div>
+            </div>
+            
 
+        </div>
+    </div>
+
+    <!-- Creator Card -->
+    <div class="creator-card">
+        <img src="{{ url_for('static', filename='images/creator.jpg') }}" 
+             alt="Latif Xurramov" 
+             class="creator-image"
+             onerror="this.src='https://via.placeholder.com/120x120/10b981/ffffff?text=LX'">
+        <h3 class="creator-name">Latif Xurramov</h3>
+        <p class="creator-bio">
+            Python/Flask dasturchisi, AI mutaxassisi. Ushbu loyiha tibbiyot sohasiga 
+            hissa qo'shish maqsadida yaratildi.
+        </p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
         {% if current_user.is_authenticated %}
             <a href="{{ url_for('app_page') }}" class="btn btn-primary">
                 🧠 Tahlil Boshlash
             </a>
         {% else %}
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <div class="btn-group">
                 <a href="{{ url_for('login') }}" class="btn btn-primary">
                     🔑 Kirish
                 </a>
@@ -36,5 +57,386 @@
             </div>
         {% endif %}
     </div>
+
+    <!-- Features Section -->
+    <div class="features-section">
+        <h2 class="section-title">Nima uchun NeuroScan AI?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Tez Tahlil</h3>
+                <p>Bir necha soniya ichida miya skanerini tahlil qiling</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Aniq Natijalar</h3>
+                <p>AI texnologiyasi yordamida yuqori aniqlikda tashxis</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Xavfsiz</h3>
+                <p>Ma'lumotlaringiz maxfiyligi kafolatlangan</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💻</div>
+                <h3>Qulay Interfeys</h3>
+                <p>Oson foydalanish uchun mo'ljallangan interfeys</p>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Info Modal -->
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="hideInfo()">&times;</span>
+        <h2>Miya O'simtasi Haqida</h2>
+        <div class="modal-body">
+            <div class="info-grid">
+                <div class="info-item">
+                    <h3>🔍 Ta'rifi</h3>
+                    <p>Miya yoki bosh suyagi ichidagi hujayralarning nazoratsiz bo'linishi.</p>
+                </div>
+                <div class="info-item">
+                    <h3>🎯 Sabablari</h3>
+                    <p>Genetik omillar, radiatsiya, immun tizimi zaifligi, viruslar.</p>
+                </div>
+                <div class="info-item">
+                    <h3>📊 Turlari</h3>
+                    <p>Glioma, meningioma, pituitary adenoma, medulloblastoma.</p>
+                </div>
+                <div class="info-item">
+                    <h3>⚠️ Belgilari</h3>
+                    <p>Bosh og'rig'i, ko'ngil aynishi, ko'rish muammolari, tutqanoq.</p>
+                </div>
+            </div>
+            <div class="medical-note">
+                <strong>❗ Eslatma:</strong> Bu dastur faqat dastlabki tekshiruv uchun. Aniq tashxis uchun shifokorga murojaat qiling.
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Slider Styles */
+.slider-section {
+    margin: 4rem 0;
+}
+
+.slider-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.slider {
+    position: relative;
+    height: 500px;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+
+.slide-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.slide-content p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Slider Controls */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+}
+
+.slider-btn:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn {
+    left: 20px;
+}
+
+.next-btn {
+    right: 20px;
+}
+
+/* Slider Dots */
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* Action Buttons */
+.action-buttons {
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Features Section */
+.features-section {
+    margin: 5rem 0;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: var(--surface-light);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-secondary);
+    border-radius: 16px 16px 0 0;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: var(--gradient-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.feature-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .slider {
+        height: 400px;
+    }
+    
+    .slider-container {
+        border-radius: 12px;
+        margin: 0 1rem;
+    }
+    
+    .slide-content {
+        padding: 1.5rem;
+    }
+    
+    .slide-content h3 {
+        font-size: 1.25rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-group .btn {
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slider {
+        height: 300px;
+    }
+    
+    .slider-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+</style>
+
+<script>
+// Slider functionality
+let currentSlideIndex = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+
+function showSlide(n) {
+    // Hide all slides
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    // Adjust index if out of bounds
+    if (n >= slides.length) currentSlideIndex = 0;
+    if (n < 0) currentSlideIndex = slides.length - 1;
+    
+    // Show current slide
+    slides[currentSlideIndex].classList.add('active');
+    dots[currentSlideIndex].classList.add('active');
+}
+
+function nextSlide() {
+    currentSlideIndex++;
+    showSlide(currentSlideIndex);
+}
+
+function prevSlide() {
+    currentSlideIndex--;
+    showSlide(currentSlideIndex);
+}
+
+function currentSlide(n) {
+    currentSlideIndex = n - 1;
+    showSlide(currentSlideIndex);
+}
+
+// Auto slide
+let slideInterval = setInterval(nextSlide, 5000);
+
+// Pause on hover
+const slider = document.querySelector('.slider-container');
+slider.addEventListener('mouseenter', () => {
+    clearInterval(slideInterval);
+});
+
+slider.addEventListener('mouseleave', () => {
+    slideInterval = setInterval(nextSlide, 5000);
+});
+
+// Initialize slider
+document.addEventListener('DOMContentLoaded', function() {
+    showSlide(currentSlideIndex);
+    console.log('Slider initialized with', slides.length, 'slides');
+});
+
+// Modal functions
+function showInfo() {
+    document.getElementById('infoModal').style.display = 'flex';
+}
+
+function hideInfo() {
+    document.getElementById('infoModal').style.display = 'none';
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('infoModal');
+    if (event.target === modal) {
+        hideInfo();
+    }
+}
+</script>
 {% endblock %}

@@ -1,11 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Animated Background with MRI Images -->
+<div class="app-background">
+    <div class="background-slider">
+        <div class="bg-slide active" style="background-image: url('{{ url_for('static', filename='images/bg1.jpg') }}');"></div>
+        <div class="bg-slide" style="background-image: url('{{ url_for('static', filename='images/bg2.jpg') }}');"></div>
+        <div class="bg-slide" style="background-image: url('{{ url_for('static', filename='images/bg3.jpg') }}');"></div>
+        <div class="bg-slide" style="background-image: url('{{ url_for('static', filename='images/bg4.jpg') }}');"></div>
+    </div>
+    <div class="background-overlay"></div>
+</div>
+
 <div class="container">
     <!-- Header -->
     <div class="hero">
-        <h1 class="hero-title">Miya Skaneri Tahlili</h1>
-        <p class="hero-subtitle">
+        <h1 class="hero-title2">Miya Skaneri Tahlili</h1>
+        <p class="hero-subtitle" style="color: white; font-size: 24px;">
             MRI yoki CT skaneringizni yuklang va sun'iy intellekt yordamida 
             miya o'simtalarini tezda aniqlang
         </p>
@@ -69,9 +80,36 @@
                     <h3 style="color: var(--text-primary); margin-bottom: 0.5rem;">AI Tahlil Jarayoni</h3>
                     <p style="color: var(--text-muted);">Rasm qayta ishlanmoqda, iltimos kuting...</p>
                 </div>
+
             </div>
 
             <div id="resultState" class="hidden"></div>
+        </div>
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-number">5</div>
+                <div class="stat-label">Soniyada tahlil</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Aniqlik darajasi</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🛡️</div>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Xavfsizlik</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💡</div>
+                <div class="stat-number">AI</div>
+                <div class="stat-label">Zamonaviy texnologiya</div>
+            </div>
         </div>
     </div>
 </div>
@@ -104,4 +142,512 @@
         </div>
     </div>
 </div>
+
+<style>
+/* App Background with MRI Images */
+.app-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.background-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.bg-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    filter: brightness(1.1) contrast(1.1) saturate(1.1);
+}
+
+.bg-slide.active {
+    opacity: 1;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(255, 255, 255, 0.85); */
+}
+
+/* Enhanced Card Styles for Better Visibility */
+.card {
+    background: rgba(228, 227, 227, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    background: rgba(228, 222, 222, 0.98);
+    transform: translateY(-5px);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.12),
+        0 4px 12px rgba(0, 0, 0, 0.06);
+    border-color: rgba(37, 99, 235, 0.3);
+}
+
+/* Statistics Section */
+.stats-section {
+    margin: 4rem 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+.stat-card:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Upload Area Enhancement */
+.upload-area {
+    background: rgba(233, 233, 233, 0.8);
+    border: 2px dashed rgba(37, 99, 235, 0.3);
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .stat-card {
+        padding: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+
+/* Loading State Enhancement */
+.loading {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    margin: 1rem 0;
+}
+
+/* Result States Enhancement */
+.result-positive,
+.result-negative {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+}
+</style>
+
+<script>
+// Background Slider for App Page
+class AppBackgroundSlider {
+    constructor() {
+        this.slides = document.querySelectorAll('.bg-slide');
+        this.currentSlide = 0;
+        this.slideInterval = null;
+        this.init();
+    }
+
+    init() {
+        console.log('App background slider initialized. Slides:', this.slides.length);
+        
+        if (this.slides.length > 0) {
+            this.showSlide(0);
+            this.startSlider();
+            this.checkImages();
+        }
+    }
+
+    checkImages() {
+        this.slides.forEach((slide, index) => {
+            const img = new Image();
+            const bgImage = slide.style.backgroundImage;
+            if (bgImage) {
+                img.src = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+                
+                img.onload = () => {
+                    console.log(`✅ Background image ${index + 1} loaded`);
+                };
+                
+                img.onerror = () => {
+                    console.error(`❌ Background image ${index + 1} failed to load`);
+                };
+            }
+        });
+    }
+
+    showSlide(index) {
+        // Barcha slidelarni yashirish
+        this.slides.forEach(slide => {
+            slide.classList.remove('active');
+            slide.style.zIndex = '1';
+        });
+        
+        // Faqat joriy slideni ko'rsatish
+        this.slides[index].classList.add('active');
+        this.slides[index].style.zIndex = '2';
+        
+        this.currentSlide = index;
+    }
+
+    nextSlide() {
+        let next = this.currentSlide + 1;
+        if (next >= this.slides.length) {
+            next = 0;
+        }
+        this.showSlide(next);
+    }
+
+    startSlider() {
+        this.slideInterval = setInterval(() => {
+            this.nextSlide();
+        }, 4000); // 3 seconds per slide
+    }
+
+    stopSlider() {
+        if (this.slideInterval) {
+            clearInterval(this.slideInterval);
+        }
+    }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize background slider
+    const bgSlider = new AppBackgroundSlider();
+    
+    // Initialize analysis functionality
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const emptyState = document.getElementById('emptyState');
+    const previewState = document.getElementById('previewState');
+    const loadingState = document.getElementById('loadingState');
+    const resultState = document.getElementById('resultState');
+
+    if (imageInput) {
+        imageInput.addEventListener('change', handleImageUpload);
+    }
+
+    function handleImageUpload(e) {
+        const file = e.target.files[0];
+        if (file) {
+            if (file.size > 10 * 1024 * 1024) {
+                alert('Fayl hajmi 10MB dan oshmasligi kerak!');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                showElement(previewState);
+                hideElement(emptyState);
+                hideElement(loadingState);
+                hideElement(resultState);
+                showElement(analyzeBtn);
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    window.analyzeImage = analyzeImage;
+    window.showGuide = showGuide;
+    window.hideGuide = hideGuide;
+    window.resetForm = resetForm;
+});
+
+// Analysis functions
+async function analyzeImage() {
+    const file = document.getElementById('imageInput').files[0];
+    if (!file) {
+        alert('Iltimos, avval rasm yuklang!');
+        return;
+    }
+    
+    const emptyState = document.getElementById('emptyState');
+    const previewState = document.getElementById('previewState');
+    const loadingState = document.getElementById('loadingState');
+    const resultState = document.getElementById('resultState');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    
+    hideElement(emptyState);
+    hideElement(previewState);
+    showElement(loadingState);
+    hideElement(resultState);
+    hideElement(analyzeBtn);
+    
+    const formData = new FormData();
+    formData.append('image', file);
+    
+    try {
+        const response = await fetch('/analyze', {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            throw new Error('Server xatosi: ' + response.status);
+        }
+        
+        const result = await response.json();
+        
+        hideElement(loadingState);
+        showElement(resultState);
+        
+        displayResults(result);
+        
+    } catch (error) {
+        console.error('Tahlil xatosi:', error);
+        hideElement(loadingState);
+        showElement(resultState);
+        displayError(error.message);
+    }
+}
+
+function displayResults(result) {
+    const resultState = document.getElementById('resultState');
+    
+    if (result.detected) {
+        let predictionsHTML = '';
+        result.predictions.forEach((pred, index) => {
+            predictionsHTML += `
+                <div class="prediction-item" style="background: rgba(239, 68, 68, 0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid var(--error);">
+                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 0.5rem;">
+                        <strong style="color: var(--error);">O'simta #${index + 1}</strong>
+                        <span style="color: var(--text-primary); font-weight: 600;">${pred.class || 'tumor'}</span>
+                    </div>
+                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 0.5rem;">
+                        <span style="color: var(--text-secondary);">Ishonch darajasi:</span>
+                        <span style="color: var(--error); font-weight: 700; font-size: 1.1rem;">${pred.confidence}%</span>
+                    </div>
+                    <div class="confidence-bar" style="background: rgba(239, 68, 68, 0.2); height: 8px; border-radius: 10px; margin-top: 0.5rem; overflow: hidden;">
+                        <div class="confidence-fill" style="height: 100%; background: var(--error); border-radius: 10px; width: ${pred.confidence}%;"></div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        resultState.innerHTML = `
+            <div class="card-header">
+                <div class="card-icon">📊</div>
+                <div>
+                    <div class="card-title">Tahlil Natijasi</div>
+                    <div class="card-subtitle">AI tomonidan aniqlangan miya o'simtalari</div>
+                </div>
+            </div>
+            
+            <div class="text-center mb-4">
+                <img src="data:image/jpeg;base64,${result.image}" 
+                     alt="Tahlil natijasi" 
+                     style="max-width: 100%; max-height: 300px; border-radius: 12px; border: 2px solid var(--error);">
+            </div>
+            
+            <div class="result-positive" style="background: rgba(239, 68, 68, 0.05); border: 2px solid var(--error); border-radius: 16px; padding: 2rem;">
+                <div class="text-center mb-4">
+                    <div style="font-size: 3rem; color: var(--error); margin-bottom: 1rem;">⚠️</div>
+                    <h3 style="color: var(--error); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">
+                        O'simta Aniqlandi!
+                    </h3>
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 12px; margin-bottom: 1rem;">
+                        <p style="font-size: 1.2rem; color: var(--text-primary);">
+                            Aniqlangan o'simtalar soni: <strong style="color: var(--error); font-size: 1.4rem;">${result.count}</strong>
+                        </p>
+                    </div>
+                </div>
+                
+                ${predictionsHTML}
+                
+                <div style="background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 12px; margin-top: 1.5rem;">
+                    <p style="color: var(--error); text-align: center; font-weight: 600;">
+                        ⚕️ Zudlik bilan tibbiy mutaxassis bilan maslahatlashing!
+                    </p>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                <button class="btn btn-secondary" onclick="showGuide()" style="flex: 1;">
+                    ℹ️ Ma'lumot
+                </button>
+                <button class="btn btn-primary" onclick="resetForm()" style="flex: 1;">
+                    🔄 Yangi Tahlil
+                </button>
+            </div>
+        `;
+    } else {
+        resultState.innerHTML = `
+            <div class="card-header">
+                <div class="card-icon">📊</div>
+                <div>
+                    <div class="card-title">Tahlil Natijasi</div>
+                    <div class="card-subtitle">AI tomonidan o'tkazilgan miya skaneri tahlili</div>
+                </div>
+            </div>
+            
+            <div class="text-center mb-4">
+                <img src="data:image/jpeg;base64,${result.image}" 
+                     alt="Tahlil natijasi" 
+                     style="max-width: 100%; max-height: 300px; border-radius: 12px; border: 2px solid var(--success);">
+            </div>
+            
+            <div class="result-negative" style="background: rgba(16, 185, 129, 0.05); border: 2px solid var(--success); border-radius: 16px; padding: 2rem;">
+                <div class="text-center">
+                    <div style="font-size: 3rem; color: var(--success); margin-bottom: 1rem;">✅</div>
+                    <h3 style="color: var(--success); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">
+                        O'simta Aniqlanmadi
+                    </h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">
+                        AI tahlil natijasiga ko'ra, rasmda miya o'simtasi belgilari topilmadi.
+                    </p>
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 12px;">
+                        <p style="color: var(--success); font-size: 0.9rem;">
+                            ℹ️ Bu natija faqat dastlabki tekshiruv. Aniq tashxis uchun shifokor bilan maslahatlashing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" onclick="resetForm()" style="width: 100%; margin-top: 1.5rem;">
+                🔄 Yangi Tahlil Boshlash
+            </button>
+        `;
+    }
+}
+
+function displayError(message) {
+    const resultState = document.getElementById('resultState');
+    resultState.innerHTML = `
+        <div class="text-center">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">❌</div>
+            <h3 style="color: var(--error); margin-bottom: 1rem;">Xatolik Yuz Berdi</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">${message}</p>
+            <button class="btn btn-primary" onclick="resetForm()">
+                🔄 Qayta Urinish
+            </button>
+        </div>
+    `;
+}
+
+function resetForm() {
+    const imageInput = document.getElementById('imageInput');
+    const emptyState = document.getElementById('emptyState');
+    const previewState = document.getElementById('previewState');
+    const loadingState = document.getElementById('loadingState');
+    const resultState = document.getElementById('resultState');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    
+    if (imageInput) imageInput.value = '';
+    showElement(emptyState);
+    hideElement(previewState);
+    hideElement(loadingState);
+    hideElement(resultState);
+    hideElement(analyzeBtn);
+}
+
+function showGuide() {
+    document.getElementById('guideModal').style.display = 'flex';
+}
+
+function hideGuide() {
+    document.getElementById('guideModal').style.display = 'none';
+}
+
+// Utility functions
+function showElement(element) {
+    if (element) element.classList.remove('hidden');
+}
+
+function hideElement(element) {
+    if (element) element.classList.add('hidden');
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
+</script>
 {% endblock %}
