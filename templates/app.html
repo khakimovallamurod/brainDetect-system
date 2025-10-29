@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="animated-bg">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+</div>
+
+<div class="container">
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo-inner">
+                <div class="logo-emoji">🧠</div>
+                <h1>NeuroScan AI</h1>
+                <div class="logo-emoji">✨</div>
+            </div>
+        </div>
+        <p class="subtitle">Sun'iy intellekt yordamida miya o'simtalarini aniqlash platformasi</p>
+    </div>
+
+    <div class="main-grid">
+        <div class="card">
+            <div class="card-title">
+                <span class="icon">📤</span> Rasm yuklash
+            </div>
+            <div class="card-subtitle">MRI yoki CT skan yuklang</div>
+
+            <div class="upload-area" onclick="document.getElementById('imageInput').click()">
+                <div class="upload-icon">📤</div>
+                <h3>Faylni tanlang</h3>
+                <p>PNG, JPG, JPEG (MAX. 10MB)</p>
+                <input type="file" id="imageInput" accept="image/*" style="display:none;">
+            </div>
+            
+            <button id="guideBtn" class="btn btn-secondary" onclick="showGuide()">
+                <span>📖 Foydalanish Qo'llanma</span>
+            </button>
+
+            <button id="analyzeBtn" class="btn btn-primary hidden" onclick="analyzeImage()">
+                <span>🧠 AI Tahlil Boshlash ✨</span>
+            </button>
+        </div>
+
+        <div class="card">
+            <div id="emptyState">
+                <div class="empty-content">
+                    <div class="empty-icon">
+                        <div>🧠</div>
+                    </div>
+                    <p>Tahlil natijalari bu yerda ko'rsatiladi</p>
+                </div>
+            </div>
+
+            <div id="previewState" class="hidden">
+                <div class="card-title">
+                    <span class="icon">✨</span> Yuklangan rasm
+                </div>
+                <div class="preview-container">
+                    <img id="imagePreview" alt="Preview">
+                </div>
+            </div>
+
+            <div id="loadingState" class="hidden">
+                <div class="loading">
+                    <div class="spinner">
+                        <div class="spinner-inner">🧠</div>
+                    </div>
+                    <h2>AI Tahlil Jarayoni</h2>
+                    <p>Rasm qayta ishlanmoqda...</p>
+                </div>
+            </div>
+
+            <div id="resultState" class="hidden"></div>
+        </div>
+    </div>
+</div>
+
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="hideInfo()">&times;</span>
+        <h2>Miya o'simtasi haqida</h2>
+        <p><strong>Ta'rifi:</strong> Miya yoki bosh suyagi ichidagi hujayralarning nazoratsiz bo'linishi.</p>
+        <p><strong>Sabablari:</strong> Genetik omillar, radiatsiya, immun tizimi zaifligi, viruslar.</p>
+        <p><strong>Turlari:</strong> Glioma, meningioma, pituitary adenoma, medulloblastoma, metastatik o'simtalar.</p>
+        <p><strong>Belgilari:</strong> Bosh og'rig'i, ko'ngil aynishi, ko'rish muammolari, tutqanoq, xotira o'zgarishi.</p>
+        <p><strong>Diagnostika:</strong> MRI, CT, biopsiya.</p>
+        <p><strong>Davolash:</strong> Jarrohlik, radioterapiya, kemoterapiya, maqsadli terapiya, immunoterapiya.</p>
+        <p class="note"><strong>Eslatma:</strong> Bu dastur faqat dastlabki tekshiruv uchun. Aniq tashxis uchun shifokorga murojaat qiling.</p>
+    </div>
+</div>
+
+<div id="guideModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="hideGuide()">&times;</span>
+        <h2>Foydalanish Qo'llanma</h2>
+        <p><strong>1. Rasm yuklash:</strong> MRI yoki CT skan rasmini yuklang (PNG, JPG, JPEG formatida, maksimal 10MB).</p>
+        <p><strong>2. Tahlil boshlash:</strong> "AI Tahlil Boshlash" tugmasini bosing.</p>
+        <p><strong>3. Natijani kutish:</strong> Bir necha soniya ichida natija ko'rsatiladi.</p>
+        <p><strong>4. Natija:</strong> Agar o'simta aniqlansa, batafsil ma'lumot va tavsiyalar ko'rsatiladi.</p>
+        <p class="note"><strong>Eslatma:</strong> Bu dastlabki tahlil. Aniq natija uchun shifokorga murojaat qiling.</p>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

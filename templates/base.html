@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NeuroScan AI{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-logo">🧠 NeuroScan AI</div>
+        <div class="nav-links">
+            {% if current_user.is_authenticated %}
+                <span>Xush kelibsiz, <b>{{ current_user.username }}</b></span>
+                <a href="{{ url_for('app_page') }}">Asosiy</a>
+                <a href="{{ url_for('logout') }}">Chiqish</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Kirish</a>
+                <a href="{{ url_for('register') }}">Roʻyxatdan oʻtish</a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

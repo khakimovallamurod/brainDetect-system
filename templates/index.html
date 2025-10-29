@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>NeuroScan AI</h1>
+    <p style="margin-top:15px;font-size:20px;">Sun'iy intellekt yordamida miya o'rimtalarini aniqlash platformasi</p>
+
+    <div class="creator">
+        <img src="{{ url_for('static', filename='images/creator.jpg') }}" alt="Latif Xurramov">
+        <h2>Latif Xurramov</h2>
+        <p>Python/Flask dasturchisi, AI-mutaxassisi. Ushbu loyiha tibbiyot sohasiga hissa qo'shish maqsadida yaratildi. Tajriba: Flask, Machine Learning, Roboflow API.</p>
+    </div>
+
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('app_page') }}" class="btn">Tahlil boshlash</a>
+    {% else %}
+        <a href="{{ url_for('login') }}" class="btn">Kirish / Ro'yxatdan o'tish</a>
+    {% endif %}
+</div>
+
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="hideInfo()">&times;</span>
+        <h2>Miya o'simtasi haqida</h2>
+        <p><strong>Ta'rifi:</strong> Miya yoki bosh suyagi ichidagi hujayralarning nazoratsiz bo'linishi.</p>
+        <p><strong>Sabablari:</strong> Genetik omillar, radiatsiya, immun tizimi zaifligi, viruslar.</p>
+        <p><strong>Turlari:</strong> Glioma, meningioma, pituitary adenoma, medulloblastoma, metastatik o'simtalar.</p>
+        <p><strong>Belgilari:</strong> Bosh og'rig'i, ko'ngil aynishi, ko'rish muammolari, tutqanoq, xotira o'zgarishi.</p>
+        <p><strong>Diagnostika:</strong> MRI, CT, biopsiya.</p>
+        <p><strong>Davolash:</strong> Jarrohlik, radioterapiya, kemoterapiya, maqsadli terapiya, immunoterapiya.</p>
+        <p class="note"><strong>Eslatma:</strong> Bu dastur faqat dastlabki tekshiruv uchun. Aniq tashxis uchun shifokorga murojaat qiling.</p>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}
