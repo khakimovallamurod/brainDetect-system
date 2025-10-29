@@ -3,26 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}NeuroScan AI{% endblock %}</title>
+    <title>{% block title %}NeuroScan AI - Miya O'simtalarini Aniqlash{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="navbar">
-        <div class="nav-logo">🧠 NeuroScan AI</div>
-        <div class="nav-links">
-            {% if current_user.is_authenticated %}
-                <span>Xush kelibsiz, <b>{{ current_user.username }}</b></span>
-                <a href="{{ url_for('app_page') }}">Asosiy</a>
-                <a href="{{ url_for('logout') }}">Chiqish</a>
-            {% else %}
-                <a href="{{ url_for('login') }}">Kirish</a>
-                <a href="{{ url_for('register') }}">Roʻyxatdan oʻtish</a>
-            {% endif %}
+    <!-- Background Slider -->
+    <div class="bg-slider">
+        <div class="slide active" style="background-image: url('{{ url_for('static', filename='images/bg1.jpg') }}');"></div>
+        <div class="slide" style="background-image: url('{{ url_for('static', filename='images/bg2.jpg') }}');"></div>
+        <div class="slide" style="background-image: url('{{ url_for('static', filename='images/bg3.jpg') }}');"></div>
+        <div class="slide" style="background-image: url('{{ url_for('static', filename='images/bg4.jpg') }}');"></div>
+        <div class="overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">🧠</div>
+                <span class="logo-text">NeuroScan AI</span>
+            </div>
+            <div class="nav-links">
+                {% if current_user.is_authenticated %}
+                    <span class="user-welcome">Xush kelibsiz, <strong>{{ current_user.username }}</strong></span>
+                    <a href="{{ url_for('app_page') }}" class="nav-link">Tahlil Qilish</a>
+                    <a href="{{ url_for('logout') }}" class="nav-link logout-btn">Chiqish</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="nav-link">Kirish</a>
+                    <a href="{{ url_for('register') }}" class="nav-link primary">Ro'yxatdan O'tish</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Modals -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hideInfo()">&times;</span>
+            <h2>Miya O'simtasi Haqida</h2>
+            <div class="modal-body">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h3>🔍 Ta'rifi</h3>
+                        <p>Miya yoki bosh suyagi ichidagi hujayralarning nazoratsiz bo'linishi.</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>🎯 Sabablari</h3>
+                        <p>Genetik omillar, radiatsiya, immun tizimi zaifligi, viruslar.</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>📊 Turlari</h3>
+                        <p>Glioma, meningioma, pituitary adenoma, medulloblastoma.</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>⚠️ Belgilari</h3>
+                        <p>Bosh og'rig'i, ko'ngil aynishi, ko'rish muammolari, tutqanoq.</p>
+                    </div>
+                </div>
+                <div class="medical-note">
+                    <strong>❗ Eslatma:</strong> Bu dastur faqat dastlabki tekshiruv uchun. Aniq tashxis uchun shifokorga murojaat qiling.
+                </div>
+            </div>
         </div>
     </div>
 
-    {% block content %}{% endblock %}
-
-    {% block scripts %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
