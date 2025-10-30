@@ -1,22 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Animated Background with MRI Images -->
-<div class="app-background">
-    <div class="background-slider">
-        <div class="bg-slide active" style="background-image: url('{{ url_for('static', filename='images/bg1.jpg') }}');"></div>
-        <div class="bg-slide" style="background-image: url('{{ url_for('static', filename='images/bg2.jpg') }}');"></div>
-        <div class="bg-slide" style="background-image: url('{{ url_for('static', filename='images/bg3.jpg') }}');"></div>
-        <div class="bg-slide" style="background-image: url('{{ url_for('static', filename='images/bg4.jpg') }}');"></div>
-    </div>
-    <div class="background-overlay"></div>
-</div>
-
 <div class="container">
     <!-- Header -->
     <div class="hero">
         <h1 class="hero-title2">Miya Skaneri Tahlili</h1>
-        <p class="hero-subtitle" style="color: white; font-size: 24px;">
+        <p class="hero-subtitle">
             MRI yoki CT skaneringizni yuklang va sun'iy intellekt yordamida 
             miya o'simtalarini tezda aniqlang
         </p>
@@ -86,32 +75,6 @@
             <div id="resultState" class="hidden"></div>
         </div>
     </div>
-
-    <!-- Statistics Section -->
-    <div class="stats-section">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon">⚡</div>
-                <div class="stat-number">5</div>
-                <div class="stat-label">Soniyada tahlil</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">🎯</div>
-                <div class="stat-number">95%</div>
-                <div class="stat-label">Aniqlik darajasi</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">🛡️</div>
-                <div class="stat-number">100%</div>
-                <div class="stat-label">Xavfsizlik</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">💡</div>
-                <div class="stat-number">AI</div>
-                <div class="stat-label">Zamonaviy texnologiya</div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Guide Modal -->
@@ -142,181 +105,6 @@
         </div>
     </div>
 </div>
-
-<style>
-/* App Background with MRI Images */
-.app-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-}
-
-.background-slider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.bg-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    filter: brightness(1.1) contrast(1.1) saturate(1.1);
-}
-
-.bg-slide.active {
-    opacity: 1;
-}
-
-.background-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* background: rgba(255, 255, 255, 0.85); */
-}
-
-/* Enhanced Card Styles for Better Visibility */
-.card {
-    background: rgba(228, 227, 227, 0.95);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.08),
-        0 2px 8px rgba(0, 0, 0, 0.04);
-    transition: all 0.3s ease;
-}
-
-.card:hover {
-    background: rgba(228, 222, 222, 0.98);
-    transform: translateY(-5px);
-    box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.12),
-        0 4px 12px rgba(0, 0, 0, 0.06);
-    border-color: rgba(37, 99, 235, 0.3);
-}
-
-/* Statistics Section */
-.stats-section {
-    margin: 4rem 0;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.stat-card {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 2rem;
-    border-radius: 16px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-}
-
-.stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: var(--gradient-primary);
-}
-
-.stat-card:hover {
-    background: rgba(255, 255, 255, 0.95);
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-}
-
-.stat-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-}
-
-.stat-label {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-/* Upload Area Enhancement */
-.upload-area {
-    background: rgba(233, 233, 233, 0.8);
-    border: 2px dashed rgba(37, 99, 235, 0.3);
-    transition: all 0.3s ease;
-}
-
-.upload-area:hover {
-    background: rgba(255, 255, 255, 0.9);
-    border-color: var(--primary);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        padding: 0 1rem;
-    }
-    
-    .stat-card {
-        padding: 1.5rem;
-    }
-    
-    .stat-number {
-        font-size: 2rem;
-    }
-}
-
-/* Loading State Enhancement */
-.loading {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 16px;
-    margin: 1rem 0;
-}
-
-/* Result States Enhancement */
-.result-positive,
-.result-negative {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 16px;
-}
-</style>
 
 <script>
 // Background Slider for App Page

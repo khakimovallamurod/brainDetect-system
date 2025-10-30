@@ -40,24 +40,6 @@
         </p>
     </div>
 
-    <!-- Action Buttons -->
-    <div class="action-buttons">
-        {% if current_user.is_authenticated %}
-            <a href="{{ url_for('app_page') }}" class="btn btn-primary">
-                🧠 Tahlil Boshlash
-            </a>
-        {% else %}
-            <div class="btn-group">
-                <a href="{{ url_for('login') }}" class="btn btn-primary">
-                    🔑 Kirish
-                </a>
-                <a href="{{ url_for('register') }}" class="btn btn-secondary">
-                    📝 Ro'yxatdan O'tish
-                </a>
-            </div>
-        {% endif %}
-    </div>
-
     <!-- Features Section -->
     <div class="features-section">
         <h2 class="section-title">Nima uchun NeuroScan AI?</h2>

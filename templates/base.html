@@ -18,6 +18,7 @@
             <div class="nav-links">
                 {% if current_user.is_authenticated %}
                     <span class="user-welcome">Xush kelibsiz, <strong>{{ current_user.username }}</strong></span>
+                    <a href="{{ url_for('index') }}" class="nav-link">Bosh sahifa</a>
                     <a href="{{ url_for('app_page') }}" class="nav-link">Tahlil Qilish</a>
                     <a href="{{ url_for('logout') }}" class="nav-link logout-btn">Chiqish</a>
                 {% else %}
@@ -64,6 +65,5 @@
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
